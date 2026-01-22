@@ -1,7 +1,15 @@
 import streamlit as st
 import pandas as pd
+import os
 import joblib
 
+# Optional debug: print current dir and list files
+print("Current working directory:", os.getcwd())
+print("Files in root:", os.listdir('.'))
+print("Files in model/:", os.listdir('model') if os.path.exists('model') else "model folder missing!")
+
+model = joblib.load("model/breast_cancer_model.joblib")
+scaler = joblib.load("model/scaler.joblib")  # if you have it
 st.set_page_config(page_title="Breast Cancer Prediction", layout="centered")
 
 st.title("Breast Cancer Tumor Prediction (Educational Demo)")
