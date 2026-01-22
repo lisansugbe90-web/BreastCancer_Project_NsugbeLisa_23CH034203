@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction (Educational)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Tumor Prediction</h1>
+        <p class="disclaimer"><strong>IMPORTANT:</strong> This is an educational demo only. NOT a medical tool. Consult a doctor for real advice.</p>
+
+        <form method="POST" action="/">
+            <label for="radius_mean">Radius Mean:</label>
+            <input type="number" id="radius_mean" name="radius_mean" step="0.01" min="5" max="30" value="14.0" required>
+
+            <label for="texture_mean">Texture Mean:</label>
+            <input type="number" id="texture_mean" name="texture_mean" step="0.01" min="8" max="40" value="19.0" required>
+
+            <label for="perimeter_mean">Perimeter Mean:</label>
+            <input type="number" id="perimeter_mean" name="perimeter_mean" step="0.1" min="40" max="190" value="90.0" required>
+
+            <label for="area_mean">Area Mean:</label>
+            <input type="number" id="area_mean" name="area_mean" step="1" min="140" max="2500" value="650" required>
+
+            <label for="smoothness_mean">Smoothness Mean:</label>
+            <input type="number" id="smoothness_mean" name="smoothness_mean" step="0.001" min="0.05" max="0.17" value="0.10" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {% if prediction == 'Malignant' %}malignant{% else %}benign{% endif %}">
+                <h2>Prediction: {{ prediction }}</h2>
+                <p>Confidence: {{ probability }}%</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
